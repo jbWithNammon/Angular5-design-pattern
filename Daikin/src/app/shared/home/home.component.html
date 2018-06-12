@@ -1,0 +1,41 @@
+<!-- <button class="btn btn-primary" (click)="navigate('General')">Profile</button>
+<button class="btn btn-primary" (click)="navigate('Bus')">Bus</button>
+<button class="btn btn-primary" (click)="navigate('Family')">Family</button>
+<button class="btn btn-primary" (click)="navigate('Benefits')">Benefits</button>
+<button class="btn btn-primary" (click)="navigate('Tax')">Tax</button>
+<button class="btn btn-primary" (click)="navigate('Attendance')">Attendance</button> -->
+<!-- <button class="btn btn-danger" (click)="navigate('Products')">Product</button>
+<button class="btn btn-info" (click)="navigate('Orders')">Order</button> -->
+
+<div id="wrapper">      
+        <div id="page-inner" style="background-color:#c6d2f5;margin-bottom: 0px;">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="col-md-4 col-lg-4 col-md-offset-2 col-lg-offset-2" style="padding:20px 20px 0 20px;">
+                        <a href="javascript:void(0)" (click)="navMenu('general')" target="_self" (down)="navMenu('general')" (up)="navMenu('general')" >
+                            <div class="panel-body text-center" style="background-color:#152F54; margin-bottom:20px; border-radius: 10px;">
+                                <img id="Landing.BasicInfo" src="assets/images/menu/menu1.png" style="width:100%" />
+                                <h3>
+                                    <strong>
+                                        <label id="Landing.BasicInfo-Text" style="color:white; margin-top:20px">{{message.getMessage('Home.BasicInfo')}}</label>
+                                    </strong>
+                                </h3>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-4 col-lg-4" style="padding:20px 20px 0 20px;">
+                        <a href="javascript:void(0)" (click)="navMenu('attendance')" target="_self" (down)="navMenu('attendance')" (up)="navMenu('attendance')">
+                            <div class="panel-body text-center" style="background-color:#152F54; margin-bottom:20px; border-radius: 10px;">
+                                <img id="Landing.Attendance" src="assets/images/menu/menu2.png" style="width:100%" />
+                                <br />
+                                <h3>
+                                    <strong>
+                                        <label id="Landing.Attendance-Text" style="color:white; margin-top:20px">{{message.getMessage('Home.Attendance')}}</label>
+                                    </strong>
+                                </h3>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+           <bottom-div></bottom-div>
+        </div>
+    </div>

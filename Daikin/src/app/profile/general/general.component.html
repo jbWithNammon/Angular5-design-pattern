@@ -1,0 +1,389 @@
+﻿<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DIT - EDBS</title>
+</head>
+
+<body>
+    <!-- /. NAV SIDE  -->
+    <div id="page-wrapper">
+        <div id="page-inner">
+            <div class="row">
+                <div class="col-md-12 box-header text-center">
+                    <img class="col-md-3 text-center" id="Profile.image" src="{{imageProfileLink}}" alt="เอก  ทดสอบ" style="width:200px; padding-top:50px"
+                    />
+                    <div class="col-md-3">
+                        <div id="texton-rec">
+                            <label id="Profile.fullName" class="ProfileHeader">{{profile.FullNameTh}}</label>
+                            <br />
+                            <label id="Profile.position" style="font-size:1em">{{profile.Position}} ( {{profile.PositionYear}})</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6 pn_profile">
+                        <div class="well well-lg">
+                            <div>
+                                <table id="tbPersonalInfo" class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td id="Profile.StartWork" class="header_profile">{{message.getMessage('Profile.HireDate')}}</td>
+                                            <td id="IProfile.StartWork" class="value_profile">{{profile.JoinDate}} ( {{profile.ServiceYear}})</td>
+                                        </tr>
+                                        <tr>
+                                            <td id="Profile.Department" class="header_profile">{{message.getMessage('Profile.Dept')}}</td>
+                                            <td id="IProfile.Department" class="value_profile">{{profile.DivDeptSect}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td id="Profile.Email" class="header_profile">{{message.getMessage('Profile.Email')}}</td>
+                                            <td id="IProfile.Email" class="value_profile">{{profile.Email}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td id="Profile.ExtTel" class="header_profile">{{message.getMessage('Profile.InTel')}}</td>
+                                            <td id="IProfile.ExtTel" class="value_profile">
+                                                <label *ngIf="!isEditInTel">{{profile.Tel}}</label>
+                                                <input readonly *ngIf="isEditInTel" [numpad] type="text" class="" [(ngModel)]="profile.Tel" maxlength="4" class="form-control"
+                                                />
+                                            </td>
+                                            <td id="Profile.ExtTel-Edit" style="text-align:right;">
+                                                <input *ngIf="!isEditInTel" class="myButton-edit" id="editIntelbtn" (click)="OnclickIntel($event)" name="Profile.btnExtTel-Edit">
+                                                <input *ngIf="isEditInTel" class="myButton-cancel" id="cancelIntelbtn" (click)="OnclickIntel($event)" name="Profile.btnExtTel-Cancel"
+                                                />
+                                                <input *ngIf="isEditInTel" class="myButton-save" id="saveIntelbtn" (click)="OnclickIntel($event)" name="Profile.btnExtTel-Save"
+                                                />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td id="Profile.PCTTel" class="header_profile">{{message.getMessage('Profile.PCT')}}</td>
+                                            <td id="IProfile.PCTTel" class="value_profile">
+                                                <label *ngIf="!isEditPCT">{{profile.PHS}}</label>
+                                                <input readonly *ngIf="isEditPCT" [numpad] type="text" class="" [(ngModel)]="profile.PHS" maxlength="4" class="form-control"
+                                                />
+                                            </td>
+                                            <td id="Profile.PCTTel-Edit" style="text-align:right;">
+                                                <input *ngIf="!isEditPCT" class="myButton-edit" id="editPCTbtn" (click)="OnclickPCT($event)" name="Profile.btnPCTTel-Edit">
+                                                <input *ngIf="isEditPCT" class="myButton-cancel" id="cancelPCTbtn" (click)="OnclickPCT($event)" name="Profile.btnPCTTel-Cancel"
+                                                />
+                                                <input *ngIf="isEditPCT" class="myButton-save" id="savePCTbtn" (click)="OnclickPCT($event)" name="Profile.btnPCTTel-Save"
+                                                />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td id="Profile.Mobile" class="header_profile">{{message.getMessage('Profile.Mobile')}}</td>
+                                            <td id="IProfile.Mobile" class="value_profile">
+                                                <label *ngIf="!isEditMobile">{{profile.Mobile}}</label>
+                                                <input readonly *ngIf="isEditMobile" [numpad] type="text" class="" [(ngModel)]="profile.Mobile" maxlength="10" class="form-control"
+                                                />
+                                            </td>
+                                            <td id="Profile.Mobile-Edit" style="text-align:right;">
+                                                <input *ngIf="!isEditMobile" class="myButton-edit" id="editMobilebtn" (click)="OnclickMobile($event)" name="Profile.btnMobile-Edit">
+                                                <input *ngIf="isEditMobile" class="myButton-cancel" id="cancelMobilebtn" (click)="OnclickMobile($event)" name="Profile.btnMobille-Cancel"
+                                                />
+                                                <input *ngIf="isEditMobile" class="myButton-save" id="saveMobilebtn" (click)="OnclickMobile($event)" name="Profile.btnMobile-Save"
+                                                />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td id="Profile.LunchTime" class="header_profile">{{message.getMessage('Profile.LunchBreak')}}</td>
+                                            <td id="IProfile.LunchTime" class="value_profile">{{profile.Lunch}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td id="Profile.WC" class="header_profile">{{message.getMessage('Profile.WC')}}</td>
+                                            <td id="IProfile.WC" class="value_profile">{{profile.WorkCenter}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="row">
+                <!-- PERSONAL INFO-->
+                <div class="col-md-5" style="padding-right:11px;">
+                    <div class="box-header" style="background-color:#e3e3e3;height:413px;">
+                        <h3 style="background-color:#152F54; padding-top:25px; padding-bottom:15px">
+                            <label id="Profile.personalInfo" style="color:white; padding-left:25px">{{message.getMessage('Profile.PerInfo')}}</label>
+                        </h3>
+                        <div>
+                            <table id="tbPersonalInfo" class="table" style="margin:15px;">
+                                <tbody>
+                                    <tr>
+                                        <td colspan="2">
+                                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                                <div class="col-md-4 col-sm-4 col-xs-12">
+                                                    <label id="Profile.birthdate" class="header_personal" style="color:black;">{{message.getMessage('Profile.BirthDate')}} :</label>
+                                                </div>
+                                                <div class="col-md-4 col-sm-4 col-xs-12">
+                                                    <label id="IProfile.birthdate" class="value_profile" style="color:#152F54">{{profile.BankInfo.BirthDate}}</label>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                                <div class="col-md-4 col-sm-4 col-xs-12">
+                                                    <label id="Profile.IDCard" class="header_personal" style="color:black;">{{message.getMessage('Profile.PerId')}} :</label>
+                                                </div>
+                                                <div class="col-md-8 col-sm-8 col-xs-12">
+                                                    <label id="IProfile.IDCard" class="value_profile" style="color:#152F54">{{profile.BankInfo.IDNo}}</label>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                                <div class="col-md-4 col-sm-4 col-xs-12">
+                                                    <label id="Profile.accountName" class="header_personal" style="color:black;">{{message.getMessage('Profile.BankName')}} :</label>
+                                                </div>
+                                                <div class="col-md-8 col-sm-8 col-xs-12">
+                                                    <label id="IProfile.accountName" class="value_profile" style="color:#152F54">{{profile.BankInfo.BankName}}</label>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                                <div class="col-md-4 col-sm-4 col-xs-12">
+                                                    <label id="Profile.accountNo" class="header_personal" style="color:black;">{{message.getMessage('Profile.BankAccount')}} :</label>
+                                                </div>
+                                                <div class="col-md-8 col-sm-8 col-xs-12">
+                                                    <label id="IProfile.accountNo" class="value_profile" style="color:#152F54">{{profile.BankInfo.BankAccountNo}}</label>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <!-- <tr>
+                                        <td id="Profile.birthdate" class="header_personal" style="color:black;">{{message.getMessage('Profile.BirthDate')}} :</td>
+                                        <td id="IProfile.birthdate" class="value_profile" style="color:#152F54">{{profile.BankInfo.BirthDate}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td id="Profile.IDCard" class="header_personal" style="color:black;">{{message.getMessage('Profile.PerId')}} :</td>
+                                        <td id="IProfile.IDCard" class="value_profile" style="color:#152F54">{{profile.BankInfo.IDNo}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td id="Profile.accountName" class="header_personal" style="color:black;">{{message.getMessage('Profile.BankName')}} :</td>
+                                        <td id="IProfile.accountName" class="value_profile" style="color:#152F54">{{profile.BankInfo.BankName}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td id="Profile.accountNo" class="header_personal" style="color:black;">{{message.getMessage('Profile.BankAccount')}} :</td>
+                                        <td id="IProfile.accountNo" class="value_profile" style="color:#152F54">{{profile.BankInfo.BankAccountNo}}</td>
+                                    </tr> -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- ADDRESS-->
+                <div class="col-md-7" style="padding-left:11px;">
+                    <div class="col-md-12">
+                        <div class="box-header panel_profile_addr1">
+                            <h3 style="clear:both; padding-top:5px; margin-bottom:2px; margin-top: 2px; font-weight:bold">
+                                <label id="Profile.CurrentAddress" style="color:white;">{{message.getMessage('Profile.Contact')}}</label>
+                            </h3>
+                            <div>
+                                <table id="tbCurrentAddress" class="table" style="clear:both; margin-bottom:0px;">
+                                    <tbody>
+                                        <tr>
+                                            <td colspan="2">
+                                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <label id="Profile.houseNo_C" class="header_profile_addr">{{message.getMessage('Profile.No')}} : </label>
+                                                        <label id="IProfile.houseNo_C" class="value_profile" style="color:white;">{{profile.Contact.CurrentAddress1}}</label>
+                                                    </div>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <label id="Profile.town_C" class="header_profile_addr">{{message.getMessage('Profile.SubDist')}} : </label>
+                                                        <label id="IProfile.town_C" class="value_profile" style="color:white;">{{profile.Contact.CurrentAddress2}}</label>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <label id="Profile.city_C" class="header_profile_addr">{{message.getMessage('Profile.Dist')}} : </label>
+                                                        <label id="IProfile.city_C" class="value_profile" style="color:white;">{{profile.Contact.CurrentAddress3}}</label>
+
+                                                    </div>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <label id="Profile.state_C" class="header_profile_addr">{{message.getMessage('Profile.Province')}} : </label>
+                                                        <label id="IProfile.state_C" class="value_profile" style="color:white;">{{profile.Contact.CurrentCity}}</label>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <label id="Profile.tel_C" class="header_profile_addr">{{message.getMessage('Profile.Tel')}} : </label>
+                                                        <label id="IProfile.tel_C" class="value_profile" style="color:white;">{{profile.Contact.CurrentTelephone}}</label>
+                                                    </div>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <label id="Profile.zipcode_C" class="header_profile_addr">{{message.getMessage('Profile.PostCode')}} : </label>
+                                                        <label id="IProfile.zipcode_C" class="value_profile" style="color:white;">{{profile.Contact.CurrentZipcode}}</label>
+                                                    </div>
+
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <!-- <tr>
+                                                <td>
+                                                    <label id="Profile.houseNo_C" class="header_profile_addr">{{message.getMessage('Profile.No')}} : </label>
+                                                    <label id="IProfile.houseNo_C" class="value_profile" style="color:white;">{{profile.Contact.CurrentAddress1}}</label>
+                                                </td>
+                                                <td>
+                                                    <label id="Profile.town_C" class="header_profile_addr">{{message.getMessage('Profile.SubDist')}} : </label>
+                                                    <label id="IProfile.town_C" class="value_profile" style="color:white;">{{profile.Contact.CurrentAddress2}}</label>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <label id="Profile.city_C" class="header_profile_addr">{{message.getMessage('Profile.Dist')}} : </label>
+                                                    <label id="IProfile.city_C" class="value_profile"  style="color:white;">{{profile.Contact.CurrentAddress3}}</label>
+                                                </td>
+                                                <td>
+                                                    <label id="Profile.state_C" class="header_profile_addr">{{message.getMessage('Profile.Province')}} : </label>
+                                                    <label id="IProfile.state_C" class="value_profile" style="color:white;">{{profile.Contact.CurrentCity}}</label>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <label id="Profile.zipcode_C" class="header_profile_addr">{{message.getMessage('Profile.PostCode')}} : </label>
+                                                    <label id="IProfile.zipcode_C" class="value_profile" style="color:white;">{{profile.Contact.CurrentZipcode}}</label>
+                                                </td>
+                                                <td>
+                                                    <label id="Profile.tel_C" class="header_profile_addr">{{message.getMessage('Profile.Tel')}} : </label>
+                                                    <label id="IProfile.tel_C" class="value_profile" style="color:white;">{{profile.Contact.CurrentTelephone}}</label>
+                                                </td>
+                                            </tr> -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="box-header2 panel_profile_addr2">
+                            <h3 style="clear:both; padding-top:5px; margin-bottom:5px; margin-top: 2px;font-weight:bold">
+                                <label id="Profile.ActualAddress">{{message.getMessage('Profile.PermanentAddress')}}</label>
+                            </h3>
+                            <div>
+                                <table id="tbActualAddress" class="table" style="clear:both; margin-bottom:0px;">
+                                    <tbody>
+                                        <tr>
+                                            <td colspan="2">
+                                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <label id="Profile.houseNo_A" class="header_personal header-fix-width">{{message.getMessage('Profile.No')}} : </label>
+                                                        <label id="IProfile.houseNo_A" class="value_profile">{{profile.Contact.HomeAddress1}}</label>
+                                                    </div>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <label id="Profile.town_A" class="header_personal header-fix-width">{{message.getMessage('Profile.SubDist')}} : </label>
+                                                        <label id="IProfile.town_A" class="value_profile">{{profile.Contact.HomeAddress2}}</label>
+                                                    </div>
+                                                </div>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <label id="Profile.city_A" class="header_personal header-fix-width">{{message.getMessage('Profile.Dist')}} : </label>
+                                                        <label id="IProfile.city_A" class="value_profile">{{profile.Contact.HomeAddress3}}</label>
+                                                    </div>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <label id="Profile.state_A" class="header_personal header-fix-width">{{message.getMessage('Profile.Province')}} : </label>
+                                                        <label id="IProfile.state_A" class="value_profile">{{profile.Contact.HomeCity}}</label>
+                                                    </div>
+                                                </div>
+
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <label id="Profile.zipcode_A" class="header_personal header-fix-width">{{message.getMessage('Profile.PostCode')}} : </label>
+                                                        <label id="IProfile.zipcode_A" class="value_profile">{{profile.Contact.HomeZipcode}}</label>
+                                                    </div>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <label id="Profile.tel_A" class="header_personal header-fix-width">{{message.getMessage('Profile.Tel')}} : </label>
+                                                        <label id="IProfile.tel_A" class="value_profile">{{profile.Contact.HomeTelephone}}</label>
+                                                    </div>
+                                                </div>
+
+                                            </td>
+
+                                        </tr>
+                                        <!-- <tr>
+                                            <td>
+                                                <label id="Profile.houseNo_A" class="header_personal">{{message.getMessage('Profile.No')}} : </label>
+                                                <label id="IProfile.houseNo_A" class="value_profile">{{profile.Contact.HomeAddress1}}</label>
+                                            </td>
+                                            <td>
+                                                <label id="Profile.town_A" class="header_personal">{{message.getMessage('Profile.SubDist')}} : </label>
+                                                <label id="IProfile.town_A" class="value_profile">{{profile.Contact.HomeAddress2}}</label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label id="Profile.city_A" class="header_personal">{{message.getMessage('Profile.Dist')}} : </label>
+                                                <label id="IProfile.city_A" class="value_profile">{{profile.Contact.HomeAddress3}}</label>
+                                            </td>
+                                            <td>
+                                                <label id="Profile.state_A" class="header_personal">{{message.getMessage('Profile.Province')}} : </label>
+                                                <label id="IProfile.state_A" class="value_profile">{{profile.Contact.HomeCity}}</label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label id="Profile.zipcode_A" class="header_personal">{{message.getMessage('Profile.PostCode')}} : </label>
+                                                <label id="IProfile.zipcode_A" class="value_profile">{{profile.Contact.HomeZipcode}}</label>
+                                            </td>
+                                            <td>
+                                                <label id="Profile.tel_A" class="header_personal">{{message.getMessage('Profile.Tel')}} : </label>
+                                                <label id="IProfile.tel_A" class="value_profile">{{profile.Contact.HomeTelephone}}</label>
+                                            </td>
+                                        </tr> -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <bottom-div></bottom-div>
+    </div>
+    <!-- /. PAGE INNER  -->
+    <!-- /. PAGE WRAPPER  -->
+
+    <script>
+        var modal = document.getElementById('myModal');
+        var btn = document.getElementById("Profile.btnMobile-Edit");
+        var span = document.getElementsByClassName("close")[0];
+
+        btn.onclick = function () {
+            modal.style.display = "block";
+        }
+
+        span.onclick = function () {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+</body>
+
+</html>

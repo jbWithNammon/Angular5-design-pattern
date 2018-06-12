@@ -1,0 +1,91 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font: 71%/1.5 Roboto, Sans-Serif;
+    background: #eee;
+}
+
+#container {
+    margin: 100px auto;
+    width: 300px;
+}
+
+#keyboard {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+#keyboard span {
+    float: left;
+    margin: 0 5px 5px 0;
+    width: 60px;
+    height: 60px;
+    font-size: 24px;
+    line-height: 60px;
+    text-align: center;
+    background: #1a54a5;
+    color:white;
+    border: 1px solid #f9f9f9;
+    border-radius: 5px;
+}
+
+#keyboard span:hover {
+    position: relative;
+    top: 1px;
+    left: 1px;
+    background-color:white;
+    color: #1a54a5;
+    border: 1px solid #1a54a5;
+    cursor: pointer;
+}
+
+.clearl {
+    clear: left;
+}
+
+.lastitem {
+    margin-right: 0;
+}
+
+.numberinput{
+    height:40px;
+    width:260px;
+    border-radius:2px;
+    margin-bottom: 5px;
+    font-size:2em;
+}
+
+#alright{
+    margin-left: 220px;
+    padding: 0;
+    list-style: none;
+}
+
+#alright span {
+    float: right;
+    margin-right:36px;
+    width: 60px;
+    height: 160px;
+    font-size: 24px;
+    line-height: 60px;
+    text-align: center;
+    background: #1a54a5;
+    color:white;
+    border: 1px solid #f9f9f9;
+    border-radius: 5px;
+    padding-top: 100px;
+}
+
+#alright span:hover {
+    position: relative;
+    top: 1px;
+    left: 1px;
+    background-color:white;
+    color: #1a54a5;
+    border: 1px solid #1a54a5;
+    cursor: pointer;
+}

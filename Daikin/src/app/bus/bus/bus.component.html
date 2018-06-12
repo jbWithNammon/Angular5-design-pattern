@@ -1,0 +1,171 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DIT - EDBS</title>
+</head>
+
+<body>
+    <div id="wrapper">
+        <div id="page-wrapper">
+            <div>
+                <!-- TOPIC INFO-->
+                <div class="row">
+                    <div class="col-md-12" style="padding:0 20px 0 20px;">
+                        <h3 id="TAX-Title" class="page-header">
+                            <div>
+                                <div class="pn_header">
+                                    <i class="fa fa-truck"></i>&nbsp;
+                                    <label *ngIf="!isBusHis" id="Bus.Title">{{message.getMessage('Bus.Title')}}</label>
+                                    <label *ngIf="isBusHis" id="Bus.TitleHis">{{message.getMessage('Bus.TitleHis')}}</label>
+                                </div>
+                                <div class="pn_bus">
+                                    <div *ngIf="isBus">
+                                        <input *ngIf="!isEdit" id="Bus.btnHistory" class="btn btn-edb" style="float:right;width:120px;height:40px" type="button"
+                                            (click)="showHis()" value="{{message.getMessage('Bus.BnHistory')}}"
+                                        />
+                                    </div>
+                                    <div *ngIf="isBusHis">
+                                        <input id="Bus.btnHistory" class="btn btn-edb" style="float:right" type="button" (click)="showBus()" value="{{message.getMessage('Button.Back')}}"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        </h3>
+                    </div>
+                </div>
+                <div *ngIf="!isBusHis" class="col-md-12 col-sm-12 col-xs-12 wrap-content" style="margin-bottom:20px;">
+                    <div class="div_bus" style="margin-top:20px;" *ngFor="let pBus of bus; let i = index">
+                        <div *ngIf="isBus">
+                            <div class="div-content">
+                                <div>
+                                    <table id="" class="table">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <div class="link-blue" style="color:#152F54;float: right;cursor: pointer;margin-top:10px;" *ngIf="pBus.CodeSplit != 'A'">
+                                                        <a style="padding:0 15px 0 0;font-weight:bold;font-size:16px;" (click)="editBus(pBus.Code,i+1)" (down)="editBus(pBus.Code,i+1)"
+                                                            (up)="editBus(pBus.Code,i+1)">
+                                                            <i class="fa fa-edit" style="font-size:20px;"></i>
+                                                            &nbsp;{{message.getMessage('Button.Edit')}}
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="col-md-10 col-sm-2">
+                                                    <span id="Bus.RouteTitle" class="BusTitle">{{i+1}}. {{message.getMessage('Bus.Number')}} : {{pBus.Code}}</span>
+
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td id="Bus.RouteName" class="BusDetail">
+                                                    <span style="font-weight:bold;">{{message.getMessage('Bus.Name')}}</span> : {{pBus.Bus}}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td id="Route.BusStop" class="BusDetail">
+                                                    <span style="font-weight:bold;">{{message.getMessage('Bus.BusStop')}}</span> : {{pBus.Stop}}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-10 col-xs-offset-1" style="margin-top:20px;" *ngIf="isEdit">
+                        <div class="div-content ">
+                            <div *ngIf="isEdit" class="float-r link-blue" style="cursor: pointer;margin:10px 0 10px 0;">
+                                <a style="padding: 25px 5px 10px 10px;font-weight:bold;font-size:16px;" (click)="cancleBus()" (down)="cancleBus()" (up)="cancleBus()">&nbsp;
+                                    <i class="fa fa-times" style="font-size:20px;"></i>
+                                    {{message.getMessage('Button.Cancel')}}
+                                </a>&nbsp;&nbsp;
+                                <a style="padding: 25px 25px 10px 5px;font-weight:bold;font-size:16px;" (click)="saveBus()" (down)="saveBus()" (up)="saveBus()">&nbsp;
+                                    <i class="fa fa-save" style="font-size:20px;"></i>
+                                    {{message.getMessage('Button.Save')}}
+                                </a>
+                            </div>
+                            <div>
+                                <table id="" class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td id="Bus.CurrBusStop" class="welfare_text">
+                                                {{message.getMessage('Bus.CurentBus')}} : {{busCurrent}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="sub-topic col-md-10 col-sm-2">
+                                                <span id="Bus.RouteTitle" class="BusTitle">{{message.getMessage('Bus.BusStopEdit')}} :
+                                                    <select (change)="onBusSelect($event.target.value)" [(ngModel)]="busEdit.BusCode" class="form-control" style="float:right;margin-right:10px;">
+                                                        <option id="BusCodeEdit" *ngFor="let optBus of busNumberList" value={{optBus.Code}}>
+                                                            {{optBus.Bus}}
+                                                        </option>
+                                                    </select>
+                                                </span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td id="Route.BusStop">
+                                                <span id="Bus.RouteTitle" class="BusTitle">{{message.getMessage('Bus.BusStop')}} :
+                                                    <select [disabled]="isNoBusStop" (change)="onBusStopSelect($event.target.value)" [(ngModel)]="busEdit.StopCode" class="form-control"
+                                                        style="float:right;margin-right:10px;">
+                                                        <option id="BusStopCodeEdit" *ngFor="let optBus of busStopList" value={{optBus.Code}}>
+                                                            {{optBus.Stop}}
+                                                        </option>
+                                                    </select>
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" *ngIf="isBusHis" style="margin:10px;">
+                    <div class="col-md-12">
+                        <div id="my-tab-content" class="tab-content">
+                            <div class="panel-table">
+                                <div>
+                                    <!-- class="table-responsive" -->
+                                    <table class="table table-striped table-hover" id="dataTables-example">
+                                        <thead class="table_bg">
+                                            <tr style="height:45px;">
+                                                <th class="th_center">
+                                                    {{message.getMessage('Bus.DateHis')}}
+                                                </th>
+                                                <th>
+                                                    {{message.getMessage('Bus.OldBus')}}
+                                                </th>
+                                                <th>
+                                                    {{message.getMessage('Bus.NewBus')}}
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tr *ngFor="let data of busHis" style="height:45px;">
+                                            <td class="th_center">
+                                                {{data.ChangeDateStr}}
+                                            </td>
+                                            <td>
+                                                {{data.CurrentBus}}
+                                            </td>
+                                            <td>
+                                                {{data.NewBus}}
+                                            </td>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <bottom-div></bottom-div>
+            </div>
+            <!-- /. PAGE INNER  -->
+        </div>
+        <!-- /. PAGE WRAPPER  -->
+    </div>
+</body>
+
+</html>

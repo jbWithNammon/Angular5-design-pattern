@@ -1,0 +1,17 @@
+       
+                <nav *ngIf="isSelected && subMenu != undefined" class="navbar-default navbar-side" role="navigation">
+                        <div class="sidebar-collapse">
+                            <ul class="nav" id="main-menu" *ngFor="let sub of subMenu">
+                                <li (down)="setRouterLink(sub.Link)" (up)="setRouterLink(sub.Link)">
+                                    <!-- <a href="javascript:void(0)" [routerLink]="[sub.Link]"> -->
+                                    <a href="javascript:void(0)" >
+                                        <i [ngClass]="sub.Class"></i>
+                                        <label id="biologyInfo" style="cursor: pointer">{{message.getMessage(sub.Display)}}</label>
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                    </nav>        
+       
+     

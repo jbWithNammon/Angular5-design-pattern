@@ -1,0 +1,158 @@
+<!-- <nav *ngIf="isAuth && isSelected" class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand" href="javascript:void(0)" [routerLink]="['/Home']">Home</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation" style="">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarColor01">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item " *ngFor="let menu of menus">
+          <a class="nav-link" href={{menu.link}}>{{menu.display}} </a>
+        </li>        
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+          <button class="btn" (click)="setLang('TH')">TH</button>
+          <button class="btn" (click)="setLang('EN')">EN</button>
+          <button class="btn" (click)="setLang('VT')">VT</button>        
+        <button class="btn btn-secondary my-2 my-sm-0" (click)="getLogOut()">LogOut</button>
+        </form>
+    </div>
+  </nav> -->
+
+<nav class="navbar navbar-default top-navbar" role="navigation">
+    <div class="navbar-header">
+        <a [routerLink]="['/Home']" href="javascript:void(0)">
+            <img class="img" src="assets/images/logo/logo_new.png" class="Logo_w" />
+        </a>
+        <button *ngIf="this.app.getLocalStorage('isSelected')" type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+    </div>
+    <!-- <ul class="nav navbar-top-links navbar-right" style="padding-right:10px;">
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                    <i class="fa fa-flag fa-globe fa-2x"></i> 
+                </a>
+                <ul class="dropdown-menu dropdown-alerts">
+                    <li>
+                        <img src="assets/images/flag/flag-thailand.png" />
+                        <label id="countryname" class="fa-fw"> ไทย</label>
+                    </li>
+                    <li>
+                        <img src="assets/images/flag/flag-uk.png" />
+                        <label id="countryname">English</label>
+                    </li>
+                </ul>
+            </li>
+        </ul> -->
+    <div style="float:right;">
+        <div *ngIf="!isAuth" class="login-nav">
+            <div style="float: left;" class="login-nav-input" [hidden]="isKIOSK">
+                       <!-- <input type="text" [hidden]="!isKIOSK" (keyup.enter)="getAutoFocus()" style="height:0px;width:0px;border:0px;"  [(ngModel)]="userName"
+                        name="usn" (ngModelChange)="userName = $event"> -->
+                    <input type="text" class="form-control-login UsernameInput" style="margin-left:10px;" [(ngModel)]="userName" name="usn" (ngModelChange)="userName = $event"
+                        placeholder="Username" id="usn">
+                    <input type="password" class="form-control-login PasswordInput" [(ngModel)]="password" name="pwd" (ngModelChange)="password = $event"
+                        (keyup.enter)="getLogin()" placeholder="Password" id="pwd">&nbsp;
+                    <a class="btn btn-success btn-edb"  (click)="getLogin()">{{message.getMessage('Login.Login')}}</a>
+                    <!-- <a class="btn btn-success btn-sm btn-edb" *ngIf="isKIOSK" (click)="getAutoFocus()">{{message.getMessage('Login.Login')}}</a> -->
+            </div>
+            <div style="float: right;">
+                <ul class="nav navbar-top-links lang-res" style="padding-right:10px; height:10px">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" *ngIf="isKIOSK" (click)="getReload()"  style="padding-top:3px" data-toggle="dropdown" href="javascript:void(0)" aria-expanded="false">
+                            <i class="fa fa-refresh fa-2x"></i>
+                        </a>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" style="padding-top:3px" data-toggle="dropdown" href="javascript:void(0)" aria-expanded="false">
+                            <i class="fa fa-flag fa-globe fa-2x"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-alerts">
+                            <li class="pointer-base" (click)="setLang('TH')">
+                                <img src="assets/images/flag/flag-thailand.png" />
+                                <label style="cursor: pointer" id="countryname" class="fa-fw"> ไทย</label>
+                            </li>
+                            <li class="pointer-base" (click)="setLang('EN')">
+                                <img src="assets/images/flag/flag-uk.png" />
+                                <label style="cursor: pointer" id="countryname">English</label>
+                            </li>
+                        </ul>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+        <div class="login-nav">
+            <ul *ngIf="isAuth" class="nav navbar-top-links navbar-right">
+                <li class="dropdown" style="top:10px">
+                    <label id="username" style="font-weight:bold">{{ user.userInfo.FullName }}</label>
+                    <label id="empID"> ( {{ user.userName }} )</label>
+                    <br />
+                    <label id="department">{{ user.userInfo.DivDeptSect }}</label>
+                </li>
+                <li class="dropdown" *ngIf="!isNarrow">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)" aria-expanded="false">
+                        <i class="fa fa-flag fa-globe fa-2x"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-alerts">
+                        <li class="pointer-base" (click)="setLang('TH')">
+                            <img src="assets/images/flag/flag-thailand.png" />
+                            <label style="cursor: pointer" id="countryname" class="fa-fw"> ไทย</label>
+                        </li>
+                        <li class="pointer-base" (click)="setLang('EN')">
+                            <img src="assets/images/flag/flag-uk.png" />
+                            <label style="cursor: pointer" id="countryname">English</label>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown" *ngIf="!isNarrow">
+                    <a class="dropdown-toggle" data-toggle="dropdown" [routerLink]="['/Home']" href="javascript:void(0)" aria-expanded="false">
+                        <i class="fa fa-home fa-fw fa-2x"></i>
+                    </a>
+                </li>
+                <li class="dropdown" *ngIf="!isNarrow">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)" aria-expanded="false" (click)="getLogOut()">
+                        <i class="fa fa-sign-out fa-fw fa-2x"></i>
+                    </a>
+                </li>
+                <li class="dropdown" *ngIf="isNarrow">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                        <i class="fa fa-cogs fa-fw fa-2x"></i>
+                        <i class="fa fa-caret-down fa-2x"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li class="sub">
+                            <a href="javascript:void(0)" [routerLink]="['/Home']">
+                                <i class="fa fa-home fa-fw"></i> Home</a>
+                        </li>
+                        <li>
+                            <a [sub-dropdown] href="javascript:void(0)">
+                                <i class="fa fa-globe fa-fw"></i> Languange
+                            </a>
+                            <ul class="dropdown-submenu">
+                                <li class="pointer-base" (click)="setLang('TH')">
+                                    <img src="assets/images/flag/flag-thailand.png" />
+                                    <label style="cursor: pointer" id="countryname" class="fa-fw"> ไทย</label>
+                                </li>
+                                <li class="pointer-base" (click)="setLang('EN')">
+                                    <img src="assets/images/flag/flag-uk.png" />
+                                    <label style="cursor: pointer" id="countryname">English</label>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a (click)="getLogOut()">
+                                <i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

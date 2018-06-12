@@ -1,0 +1,49 @@
+<!-- alert -->
+<div *ngIf="data.dialogType == 'alert'">
+    <mat-dialog-content>
+        <label style="font-size:1em; color:#152F54;">
+            {{data.dialogTitle}}
+        </label>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button class="btn btn-edb" mat-dialog-close>{{message.getMessage('Button.Ok')}}</button>
+    </mat-dialog-actions>
+</div>
+
+<!-- OTP -->
+<div *ngIf="data.dialogType == 'OTP'">
+    <mat-dialog-content>
+        <div class="panel" style="background-color:#152F54;">
+            <div class="panel-heading" style="color:#FFF; text-align:center">
+                <label id="Profile.OTPHeader">
+                    <span id="Profile.OTPHeader" class="text-center OTP_Header" style="padding: 0px;">{{message.getMessage('OTP.Title')}}</span>
+                </label>
+            </div>
+        </div>
+        <div class="panel-body text-center">
+            <label id="Profile.OTPSubHeader" style="color:#152F54;" class="OTP_Header">
+                {{message.getMessage('OTP.OperationOTP')}} ({{message.getMessage('OTP.SMS')}} {{data.mobileNumber}})
+            </label>
+            <br />
+            <label id="Profile.OTPNoHeader" style="font-size:0.7em; color:#152F54;">
+                {{message.getMessage('OTP.Referance')}} : {{refCode}}
+            </label>
+            <br /><br />
+            <div style="padding-top:10px; padding:0px;">
+                <div class="col-md-6 col-sm-5 col-sm-offset-2 col-md-offset-1">
+                    <input [numpad] class="form-control" type="text" name="IProfile.OTP" [(ngModel)]="txtPasswordOTP" />
+                    <label *ngIf="!isIncorrect" style="font-size:0.7em; color:blue;margin-bottom:20px;">{{message.getMessage('OTP.OTPCode')}}</label>
+                    <label *ngIf="isIncorrect" style="font-size:0.7em; color:red;margin-bottom:20px;">{{message.getMessage('OTP.IncorrectOTP')}}</label>
+                </div>
+                <div class="col-md-4 col-sm-4">
+                    <button class="btn btn-warning" (click)="genOTPPassword()">{{message.getMessage('OTP.ResendOTP')}}</button>
+                </div>
+            </div>
+        </div>
+        <br />
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button class="btn btn-edb" style="margin-bottom:10px; margin-left:4px;width:90px;height:40px" (click)="closeDialog()">{{message.getMessage('Button.Cancel')}}</button>
+        <button class="btn btn-edb" style="margin-bottom:10px; margin-left:4px;width:90px;height:40px" (click)="summitOTP()">{{message.getMessage('Button.Ok')}}</button>
+    </mat-dialog-actions>
+</div>

@@ -1,0 +1,619 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DIT - EDBS</title>
+</head>
+
+<body>
+    <div id="wrapper">
+        <div id="page-wrapper">
+            <div>
+                <!-- TOPIC INFO-->
+                <div class="col-md-12 col-sm-12">
+                    <h3 id="TAX-Title" class="page-header">
+                        <div>
+                            <div class="pn_header">
+                                <i class="fa fa-ambulance" style="color:#152F54"></i>&nbsp;&nbsp;
+                                <span id="Welfare.Title" style="color:#152F54">{{message.getMessage('Welfare.TitleHeader')}}</span>
+                            </div>
+                        </div>
+                    </h3>
+                    <h1>
+
+                    </h1>
+                </div>
+
+                <div class="content-top">
+                    <div class="col-md-12 col-sm-12">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="well well-lg bg-darkblue">
+                            <div class="row">
+                                <div class="float-l sub-topic">
+                                    <span id="Welfare.Uniform">{{message.getMessage('Welfare.TitleEmployee')}}</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="float-r link-white" style="padding-top: 5px;"> 
+                                     <!-- && isModifyEmp -->
+                                    <span id="editEmployeeSp" *ngIf="bEEmpbtn && !bTypeOF && isModifyEmp && (
+                                        walfareModel?.EmployeeUnitform?.Shirt_Show != '' ||
+                                        walfareModel?.EmployeeUnitform?.Trouser_Show != '' ||
+                                        walfareModel?.EmployeeUnitform?.BlueSuit_Show != '' ||
+                                        walfareModel?.EmployeeUnitform?.Cap_Show != '' ||
+                                        walfareModel?.EmployeeUnitform?.Shoe_Show != '' ||
+                                        walfareModel?.EmployeeUnitform?.TShirt_Show != '' ||
+                                        walfareModel?.EmployeeUnitform?.Other_Show != ''
+                                    )" style="cursor: pointer;">
+                                        <a herf="#" id="editEmployeebtn" (click)="editData($event)" style="padding:10px;">
+                                            <i class="fa fa-edit" style="font-size:1.5em"></i>
+                                            {{message.getMessage('Button.Edit')}}
+                                        </a>
+                                    </span>
+                                    <span id="cancelEmployeeSp" *ngIf="bSCEmpbtn" style="cursor: pointer;padding-right:20px;">
+                                        <a herf="#" id="cancelEmployeebtn" (click)="cencalData($event)" style="padding:10px;">
+                                            <i class="fa fa-times" style="font-size:1.5em"></i>
+                                            {{message.getMessage('Button.Cancel')}}
+                                        </a>
+                                    </span>
+                                    <span id="saveEmployeeSp" *ngIf="bSCEmpbtn" style="cursor: pointer;">
+                                        <a herf="#" id="saveEmployeebtn" (click)="saveData($event)" style="padding:10px;">
+                                            <i class="fa fa-save" style="font-size:1.5em"></i>
+                                            {{message.getMessage('Button.Save')}}
+                                        </a>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="clear"></div>
+                            <div>
+                                <table id="tbUniform" class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td class="bef_tdHeader welfare_text_header" style="width:35%">
+                                                <span id="Welfare.UniformType">{{message.getMessage('Welfare.Type')}} :</span>
+                                            </td>
+                                            <td class="bef_tdDetail welfare_text">
+                                                <div class="radio-inline">
+                                                    <span>
+                                                        <input disabled type="radio" name="Welfare.type" id="radOP" value="OP"> {{message.getMessage('Welfare.Production')}}
+                                                    </span>
+                                                </div>
+                                                <div class="radio">
+                                                    <span>
+                                                        <input disabled type="radio" name="Welfare.type" id="radWHSP" value="WHSP"> {{message.getMessage('Welfare.WarehouseSpraying')}}
+                                                    </span>
+                                                </div>
+                                                <div class="radio">
+                                                    <span>
+                                                        <input disabled type="radio" name="Welfare.type" id="radOF" value="OF"> {{message.getMessage('Welfare.OfficeWork')}}
+                                                    </span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr style="height:50px;">
+                                            <td id="Welfare.Shirt" class="bef_tdHeader welfare_text_header">
+                                                {{message.getMessage('Welfare.Shirt')}} :
+                                            </td>
+                                            <td *ngIf="bTypeOF" class="bef_tdDetail welfare_text">
+                                                <label *ngIf="walfareModel?.EmployeeUnitform?.Shirt_Show != ''" id="IWelfare.Shirt">{{walfareModel?.EmployeeUnitform?.Shirt_Show}}</label>
+                                                <label *ngIf="!bEditUniform && walfareModel?.EmployeeUnitform?.Shirt_Show == ''" id="IWelfare.Shirt_Show">-</label>
+                                            </td>
+                                            <td *ngIf="!bTypeOF" class="bef_tdDetail welfare_text">
+                                                <label id="IWelfare.Shirt && walfareModel?.EmployeeUnitform?.Shirt_Show != ''" *ngIf="!bEditUniform">{{walfareModel?.EmployeeUnitform?.Shirt_Show}}</label>
+                                                <label *ngIf="!bEditUniform && walfareModel?.EmployeeUnitform?.Shirt_Show == ''" id="IWelfare.Shirt">-</label>
+                                                <select style="color: black" *ngIf="bEditUniform" [(ngModel)]='indexOfDropdownShirt' class="form-control">
+                                                    <option style="color: black" *ngFor="let option of dropdownShirtType" [value]="option.UniformTypeKey">{{option.UniformTypeDescription}}</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr style="height:50px;">
+                                            <td id="Welfare.Touser" class="bef_tdHeader welfare_text_header">{{message.getMessage('Welfare.Trouser')}} :</td>
+                                            <td *ngIf="bTypeOF" class="bef_tdDetail welfare_text">
+                                                <label *ngIf="walfareModel?.EmployeeUnitform?.Trouser_Show != ''" id="IWelfare.Touser">{{walfareModel?.EmployeeUnitform?.Trouser_Show}}</label>
+                                                <label *ngIf="walfareModel?.EmployeeUnitform?.Trouser_Show == ''" id="IWelfare.Touser">-</label>
+                                            </td>
+                                            <td *ngIf="!bTypeOF" class="bef_tdDetail welfare_text">
+                                                <label *ngIf="!bEditUniform && walfareModel?.EmployeeUnitform?.Trouser_Show != ''" id="IWelfare.Touser">{{walfareModel?.EmployeeUnitform?.Trouser_Show}}</label>
+                                                <label *ngIf="!bEditUniform && walfareModel?.EmployeeUnitform?.Trouser_Show == ''" id="IWelfare.Touser">-</label>
+                                                <select style="color: black" *ngIf="bEditUniform" [(ngModel)]='indexOfDropdownTrouser' class="form-control">
+                                                    <option style="color: black" *ngFor="let option of dropdownTrouserType" [value]="option.UniformTypeKey">{{option.UniformTypeDescription}}</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr style="height:50px;">
+                                            <td id="Welfare.Shop" class="bef_tdHeader welfare_text_header">{{message.getMessage('Welfare.BlueSuit')}} :</td>
+                                            <td class="bef_tdDetail welfare_text">
+                                                <label *ngIf="!bEditUniform && walfareModel?.EmployeeUnitform?.BlueSuit_Show != ''" id="IWelfare.Shop">{{walfareModel?.EmployeeUnitform?.BlueSuit_Show}}</label>
+                                                <label *ngIf="!bEditUniform && walfareModel?.EmployeeUnitform?.BlueSuit_Show == ''" id="IWelfare.Shop">-</label>
+                                                <select style="color: black" *ngIf="bEditUniform && walfareModel?.EmployeeUnitform?.BlueSuit_Show != ''" [(ngModel)]='indexOfDropdownBearSuit'
+                                                    class="form-control">
+                                                    <option style="color: black" *ngFor="let option of dropdownBearSuitType" [value]="option.UniformTypeKey">{{option.UniformTypeDescription}}</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr style="height:50px;">
+                                            <td id="Welfare.Hat" class="bef_tdHeader welfare_text_header">{{message.getMessage('Welfare.Cap')}} :</td>
+                                            <td *ngIf="bTypeOF" class="bef_tdDetail welfare_text">
+                                                <label *ngIf="walfareModel?.EmployeeUnitform?.Cap_Show != ''" id="IWelfare.Hat">{{walfareModel?.EmployeeUnitform?.Cap_Show}}</label>
+                                                <label *ngIf="walfareModel?.EmployeeUnitform?.Cap_Show == ''" id="IWelfare.Hat">-</label>
+                                            </td>
+                                            <td *ngIf="!bTypeOF" class="bef_tdDetail welfare_text">
+                                                <label *ngIf="!bEditUniform && walfareModel?.EmployeeUnitform?.Cap_Show != ''" id="IWelfare.Hat">{{walfareModel?.EmployeeUnitform?.Cap_Show}}</label>
+                                                <label *ngIf="!bEditUniform && walfareModel?.EmployeeUnitform?.Cap_Show == ''" id="IWelfare.Hat">-</label>
+                                                <select style="color: black" *ngIf="bEditUniform" [(ngModel)]='indexOfDropdownCap' class="form-control">
+                                                    <option style="color: black" *ngFor="let option of dropdownCapType" [value]="option.UniformTypeKey">{{option.UniformTypeDescription}}</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr style="height:50px;">
+                                            <td id="Welfare.Shoes" class="bef_tdHeader welfare_text_header">{{message.getMessage('Welfare.Shoes')}} :</td>
+                                            <td *ngIf="bTypeOF" class="bef_tdDetail welfare_text">
+                                                <label *ngIf="walfareModel?.EmployeeUnitform?.Shoe_Show != ''" id="IWelfare.Shoes">{{walfareModel?.EmployeeUnitform?.Shoe_Show}}</label>
+                                                <label *ngIf="walfareModel?.EmployeeUnitform?.Shoe_Show == ''" id="IWelfare.Shoes">-</label>
+                                            </td>
+                                            <td *ngIf="!bTypeOF" class="bef_tdDetail welfare_text">
+                                                <label *ngIf="!bEditUniform && walfareModel?.EmployeeUnitform?.Shoe_Show != ''" id="IWelfare.Shoes">{{walfareModel?.EmployeeUnitform?.Shoe_Show}}</label>
+                                                <label *ngIf="!bEditUniform && walfareModel?.EmployeeUnitform?.Shoe_Show == ''" id="IWelfare.Shoes">-</label>
+                                                <select style="color: black" *ngIf="bEditUniform" [(ngModel)]='indexOfDropdownShoe' class="form-control">
+                                                    <option style="color: black" *ngFor="let option of dropdownShoeType" [value]="option.UniformTypeKey">{{option.UniformTypeDescription}}</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr style="height:50px;">
+                                            <td id="Welfare.T-Shirt" class="bef_tdHeader welfare_text_header">{{message.getMessage('Welfare.TShirt')}} :</td>
+                                            <td *ngIf="bTypeOP || bTypeOF" class="bef_tdDetail welfare_text">
+                                                <label *ngIf="walfareModel?.EmployeeUnitform?.TShirt_Show != ''" id="IWelfare.T-Shirt">{{walfareModel?.EmployeeUnitform?.TShirt_Show}}</label>
+                                                <label *ngIf="walfareModel?.EmployeeUnitform?.TShirt_Show == ''" id="IWelfare.T-Shirt">-</label>
+                                            </td>
+                                            <td *ngIf="!bTypeOP && !bTypeOF" class="bef_tdDetail welfare_text_header">
+                                                <label *ngIf="!bEditUniform && walfareModel?.EmployeeUnitform?.TShirt_Show != ''" id="IWelfare.T-Shirt">{{walfareModel?.EmployeeUnitform?.TShirt_Show}}</label>
+                                                <label *ngIf="!bEditUniform && walfareModel?.EmployeeUnitform?.TShirt_Show == ''" id="IWelfare.T-Shirt">-</label>
+                                                <select style="color: black" *ngIf="bEditUniform" [(ngModel)]='indexOfDropdownTShirt' class="form-control">
+                                                    <option style="color: black" *ngFor="let option of dropdownTShirtType" [value]="option.UniformTypeKey">{{option.UniformTypeDescription}}</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr style="height:50px;">
+                                            <td class="bef_tdHeader welfare_text_header">{{message.getMessage('Welfare.Other')}} :</td>
+                                            <td class="bef_tdDetail welfare_text">
+                                                <label *ngIf="walfareModel?.EmployeeUnitform?.Other_Show != ''" id="IWelfare.Other">{{walfareModel?.EmployeeUnitform?.Other_Show}}</label>
+                                                <label *ngIf="walfareModel?.EmployeeUnitform?.Other_Show == ''" id="IWelfare.Other">-</label>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- OTHER SUIT INFO-->
+                    <div class="col-md-6 col-sm-12">
+                        <div class="well well-lg bg-white">
+                            <div class="float-l sub-topic">{{message.getMessage('Welfare.TitleOther')}}</div>
+                            <div class="clear"></div>
+                            <div>
+                                <div class="gray-box" style="position:relative;padding-bottom: 10px;">
+                                    <table id="" class="table">
+                                        <tbody>
+                                            <tr *ngIf="isModifyOth" class="link-blue" style="height:35px;">
+                                                <td colspan="2">
+                                                    <span id="editOtherSp" *ngIf="bEOthbtn && isModifyOth" style="cursor: pointer;">
+                                                                    <a herf="#" id="editOtherbtn" (click)="editData($event)" style="font-weight:bold;padding:10px;">
+                                                            <i class="fa fa-edit" style="font-size:1.5em"></i>
+                                                            {{message.getMessage('Button.Edit')}}
+                                                        </a>
+                                                    </span>
+                                                    <span id="cancelOtherSp" *ngIf="bSCOthbtn" style="cursor: pointer;padding-right:20px;">
+                                                                    <a herf="#" id="cancelOtherbtn" (click)="cencalData($event)" style="font-weight:bold;padding:10px;">
+                                                            <i class="fa fa-times" style="font-size:1.5em;"></i>
+                                                            {{message.getMessage('Button.Cancel')}}
+                                                        </a>
+                                                    </span>
+                                                    <span id="saveOtherSp" *ngIf="bSCOthbtn" style="cursor: pointer;">
+                                                        <a herf="#" id="saveOtherbtn" (click)="saveData($event)" style="font-weight:bold;padding:10px;">
+                                                            <i class="fa fa-save" style="font-size:1.5em;"></i>
+                                                            {{message.getMessage('Button.Save')}}
+                                                        </a>
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">
+                                                    <label id="Welfare.UniformType" class="welfare_text_header">{{message.getMessage('Welfare.Type')}} : </label>
+                                                    <label id="IWelfare.UniformType" class="welfare_text">{{message.getMessage('Welfare.NewYearAndOther')}}</label>
+                                                </td>
+                                            </tr>
+                                            <tr style="height:45px;">
+                                                <td id="Welfare.Other-Shirt" class="welfare_text_header">{{message.getMessage('Welfare.Shirt')}} :</td>
+                                                <td style="width:75%">
+                                                    <label *ngIf="!beditOther && walfareModel?.OtherUniforms?.Size_Show != ''" id="IWelfare.Other-Shirt" class="welfare_text">{{walfareModel?.OtherUniforms?.Size_Show}}</label>
+                                                    <label *ngIf="!beditOther && walfareModel?.OtherUniforms?.Size_Show == ''" id="IWelfare.Other-Shirt">-</label>
+                                                    <select *ngIf="beditOther" [(ngModel)]='indexOfDropdownOther' class="form-control control_width">
+                                                        <option *ngFor="let option of dropdownOtherType" [value]="option.UniformTypeKey">{{option.UniformTypeDescription}}</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+
+                                <div class="gray-box" style="position:relative; padding-bottom:10px;">
+                                    <table id="" class="table">
+                                        <tbody>
+                                            <tr *ngIf="isModifyFam" class="link-blue" style="height:35px;">
+                                                <td colspan="4">
+                                                    <span id="editFamSp" *ngIf="bEFambtn && isModifyFam" style="cursor: pointer;">
+                                                                    <a herf="#" id="editFambtn" (click)="editData($event)" style="font-weight:bold;padding:10px;">
+                                                            <i class="fa fa-edit" style="font-size:1.5em"></i>
+                                                            {{message.getMessage('Button.Edit')}}
+                                                        </a>
+                                                    </span>
+                                                    <span id="cancelFamSp" *ngIf="bSCFambtn" style="cursor: pointer;padding-right:20px;">
+                                                                    <a herf="#" id="cancelFambtn" (click)="cencalData($event)" style="font-weight:bold;padding:10px;">
+                                                            <i class="fa fa-times" style="font-size:1.5em;"></i>
+                                                            {{message.getMessage('Button.Cancel')}}
+                                                        </a>
+                                                    </span>
+                                                    <span id="saveFamSp" *ngIf="bSCFambtn" style="cursor: pointer;">
+                                                                    <a herf="#" id="saveFambtn" (click)="saveData($event)" style="font-weight:bold;padding:10px;">
+                                                            <i class="fa fa-save" style="font-size:1.5em;"></i>
+                                                            {{message.getMessage('Button.Save')}}
+                                                        </a>
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="4">
+                                                    <label id="Welfare.UniformType" class="welfare_text_header">
+                                                        {{message.getMessage('Welfare.Type')}} :
+                                                    </label>
+                                                    <label id="IWelfare.Uniformtype" class="welfare_text">
+                                                        {{message.getMessage('Welfare.FamilyTravel')}}
+                                                    </label>
+                                                </td>
+                                                            <!-- </tr>
+                                            <tr style="height:50px;">
+                                                <td id="Welfare.Employee" class="welfare_text_header">{{message.getMessage('Welfare.Employee')}} :</td>
+                                                <td colspan="3">
+                                                    <label *ngIf="!beditFam && walfareModelFamilyTrip?.EmployeeSize_Show != ''" id="IWelfare.Employee" class="welfare_text">{{walfareModelFamilyTrip?.EmployeeSize_Show}}</label>
+                                                    <label *ngIf="!beditFam && walfareModelFamilyTrip?.EmployeeSize_Show == ''" id="IWelfare.Employee">-</label>
+                                                    <select *ngIf="beditFam && walfareModelFamilyTrip.EmployeeSize_AllowBit == 'Y'" [(ngModel)]='indexOfDropdownEmployee' class="form-control control_width">
+                                                        <option *ngFor="let option of dropdownFamily_Adult" [value]="option.UniformTypeKey">{{option.UniformTypeDescription}}</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr style="height:50px;">
+                                                <td id="Welfare.Spouse" class="welfare_text_header">{{message.getMessage('Welfare.Spouse')}} :</td>
+                                                <td colspan="3">
+                                                    <label *ngIf="!beditFam && walfareModelFamilyTrip?.SpouseSize_Show != ''" id="IWelfare.Spouse" class="welfare_text">{{walfareModelFamilyTrip?.SpouseSize_Show}}</label>
+                                                    <label *ngIf="!beditFam && walfareModelFamilyTrip?.SpouseSize_Show == ''" id="IWelfare.Spouse">-</label>
+                                                    <select *ngIf="beditFam && walfareModelFamilyTrip.SpouseSize_AllowBit == 'Y'" [(ngModel)]='indexOfDropdownSpouse' class="form-control control_width">
+                                                        <option *ngFor="let option of dropdownFamily_Adult" [value]="option.UniformTypeKey">{{option.UniformTypeDescription}}</option>
+                                                    </select>
+                                                </td>
+                                                        </tr> -->
+                                                            <tr>
+                                                                <td colspan="4">
+                                                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                                                        <div [ngClass]="{'select-hidden':!beditFam || !allowEmp}" class="col-md-6 col-sm-6 col-xs-12">
+                                                                            <span>
+                                                                                <label class="span-inline welfare_text_header"> {{message.getMessage('Welfare.Employee')}} :</label>
+                                                                            </span>
+                                                                            <span>
+                                                                                <label *ngIf="!beditFam && walfareModelFamilyTrip?.EmployeeSize_Show != ''" id="IWelfare.Employee" class="welfare_text">{{walfareModelFamilyTrip?.EmployeeSize_Show}}</label>
+                                                                                <label *ngIf="!beditFam && walfareModelFamilyTrip?.EmployeeSize_Show == ''" id="IWelfare.Employee">-</label>
+                                                                                <select *ngIf="beditFam && allowEmp" [(ngModel)]='indexOfDropdownEmployee' class="form-control select-inline">
+                                                                                    <option *ngFor="let option of dropdownFamily_Adult" [value]="option.UniformTypeKey">{{option.UniformTypeDescription}}</option>
+                                                                                </select>
+                                                                            </span>
+                                                                        </div>
+                                                                        <div [ngClass]="{'select-hidden':!beditFam || !allowSpouse}" class="col-md-6 col-sm-6 col-xs-12">
+                                                                            <span>
+                                                                                <label class="span-inline  welfare_text_header">{{message.getMessage('Welfare.Spouse')}} :</label>
+                                                                            </span>
+                                                                            <span>
+                                                                                <label *ngIf="!beditFam && walfareModelFamilyTrip?.SpouseSize_Show != ''" id="IWelfare.Spouse" class="welfare_text">{{walfareModelFamilyTrip?.SpouseSize_Show}}</label>
+                                                                                <label *ngIf="!beditFam && walfareModelFamilyTrip?.SpouseSize_Show == ''" id="IWelfare.Spouse">-</label>
+                                                                                <select *ngIf="beditFam && allowSpouse" [(ngModel)]='indexOfDropdownSpouse' class="form-control select-inline" style="padding-left: 2px;">
+                                                                                    <option *ngFor="let option of dropdownFamily_Adult" [value]="option.UniformTypeKey">{{option.UniformTypeDescription}}</option>
+                                                                                </select>
+                                                                            </span>
+                                                                        </div>
+            
+                                                                    </div>
+                                                                </td>
+                                            </tr>
+                                                            <!-- <tr style="height:50px">
+                                                            <td style="width:25%" id="Welfare.Child1" class="welfare_text">{{message.getMessage('Welfare.Child1st')}} :</td>
+                                                <td style="width:25%">
+                                                    <label *ngIf="!beditFam && walfareModelFamilyTrip?.Child_1Size_Show != ''" id="IWelfare.Child1" class="welfare_text">{{walfareModelFamilyTrip?.Child_1Size_Show}}</label>
+                                                    <label *ngIf="!beditFam && walfareModelFamilyTrip?.Child_1Size_Show == ''" id="IWelfare.Child1">-</label>
+                                                                <select [(ngModel)]='indexOfDropdownChild1' class="form-control control_width">
+                                                        <option *ngFor="let option of dropdownFamily_Child" [value]="option.UniformTypeKey">{{option.UniformTypeDescription}}</option>
+                                                    </select>
+                                                </td>
+                                                <td style="width:20%" id="Welfare.Child2" class="welfare_text_header">{{message.getMessage('Welfare.Child2nd')}} :</td>
+                                                <td style="width:30%">
+                                                    <label *ngIf="!beditFam && walfareModelFamilyTrip?.Child_2Size_Show != ''" id="IWelfare.Child2" class="welfare_text">{{walfareModelFamilyTrip?.Child_2Size_Show}}</label>
+                                                    <label *ngIf="!beditFam && walfareModelFamilyTrip?.Child_2Size_Show == ''" id="IWelfare.Child2">-</label>
+                                                                <select  [(ngModel)]='indexOfDropdownChild2' class="form-control control_width">
+                                                        <option *ngFor="let option of dropdownFamily_Child" [value]="option.UniformTypeKey">{{option.UniformTypeDescription}}</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr style="height:50px;">
+                                                <td id="Welfare.Child3" class="welfare_text">{{message.getMessage('Welfare.Child3rd')}} :</td>
+                                                <td>
+                                                    <label *ngIf="!beditFam && walfareModelFamilyTrip?.Child_3Size_Show != ''" id="IWelfare.Child3" class="welfare_text">{{walfareModelFamilyTrip?.Child_3Size_Show}}</label>
+                                                    <label *ngIf="!beditFam && walfareModelFamilyTrip?.Child_3Size_Show == ''" id="IWelfare.Child3">-</label>
+                                                    <select *ngIf="beditFam && walfareModelFamilyTrip.Child_3Size_AllowBit == 'Y'" [(ngModel)]='indexOfDropdownChild3' class="form-control control_width">
+                                                        <option *ngFor="let option of dropdownFamily_Child" [value]="option.UniformTypeKey">{{option.UniformTypeDescription}}</option>
+                                                    </select>
+                                                </td>
+                                                <td id="Welfare.Child4" class="welfare_text_header">{{message.getMessage('Welfare.Child4th')}} :</td>
+                                                <td>
+                                                    <label *ngIf="!beditFam && walfareModelFamilyTrip?.Child_4Size_Show != ''" id="IWelfare.Child4" class="welfare_text">{{walfareModelFamilyTrip?.Child_4Size_Show}}</label>
+                                                    <label *ngIf="!beditFam && walfareModelFamilyTrip?.Child_4Size_Show == ''" id="IWelfare.Child4">-</label>
+                                                    <select *ngIf="beditFam && walfareModelFamilyTrip.Child_4Size_AllowBit == 'Y'" [(ngModel)]='indexOfDropdownChild4' class="form-control control_width">
+                                                        <option *ngFor="let option of dropdownFamily_Child" [value]="option.UniformTypeKey">{{option.UniformTypeDescription}}</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr style="height:50px;">
+                                                <td id="Welfare.Child5" class="welfare_text">{{message.getMessage('Welfare.Child5th')}} :</td>
+                                                <td>
+                                                    <label *ngIf="!beditFam && walfareModelFamilyTrip?.Child_5Size_Show != ''" id="IWelfare.Child5" class="welfare_text">{{walfareModelFamilyTrip?.Child_5Size_Show}}</label>
+                                                    <label *ngIf="!beditFam && walfareModelFamilyTrip?.Child_5Size_Show == ''" id="IWelfare.Child5">-</label>
+                                                    <select *ngIf="beditFam && walfareModelFamilyTrip.Child_5Size_AllowBit == 'Y'" [(ngModel)]='indexOfDropdownChild5' class="form-control control_width">
+                                                        <option *ngFor="let option of dropdownFamily_Child" [value]="option.UniformTypeKey">{{option.UniformTypeDescription}}</option>
+                                                    </select>
+                                                            </td>
+                                                        </tr> -->
+                                                            <tr>
+                                                                <td colspan="4">
+                                                                    <!-- child12-->
+                                                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                                                        <div [ngClass]="{'select-hidden':!beditFam || !allowBit1}" class="col-md-6 col-sm-6 col-xs-12">
+                                                                            <span class="span-inline">
+                                                                                <label class="span-inline  welfare_text_header">{{message.getMessage('Welfare.Child1st')}} :</label>
+                                                                            </span>
+                                                                            <span>
+                                                                                <label *ngIf="!beditFam && walfareModelFamilyTrip?.Child_1Size_Show != ''" id="IWelfare.Child1" class="welfare_text">{{walfareModelFamilyTrip?.Child_1Size_Show}}</label>
+                                                                                <label *ngIf="!beditFam && walfareModelFamilyTrip?.Child_1Size_Show == ''" id="IWelfare.Child1">-</label>
+                                                                                <select *ngIf="beditFam && allowBit1" [(ngModel)]='indexOfDropdownChild1' class="form-control select-inline">
+                                                                                    <option *ngFor="let option of dropdownFamily_Child" [value]="option.UniformTypeKey">{{option.UniformTypeDescription}}</option>
+                                                                                </select>
+                                                                            </span>
+                                                                        </div>
+                                                                        <div [ngClass]="{'select-hidden':!beditFam || !allowBit2}" class="col-md-6 col-sm-6 col-xs-12">
+                                                                            <span class="span-inline">
+                                                                                <label class="span-inline  welfare_text_header">{{message.getMessage('Welfare.Child2nd')}} :</label>
+                                                                            </span>
+                                                                            <span>
+                                                                                <label *ngIf="!beditFam && walfareModelFamilyTrip?.Child_2Size_Show != ''" id="IWelfare.Child2" class="welfare_text">{{walfareModelFamilyTrip?.Child_2Size_Show}}</label>
+                                                                                <label *ngIf="!beditFam && walfareModelFamilyTrip?.Child_2Size_Show == ''" id="IWelfare.Child2">-</label>
+                                                                                <select *ngIf="beditFam && allowBit2" [(ngModel)]='indexOfDropdownChild2' class="form-control select-inline" style="padding-left: 2px;">
+                                                                                    <option *ngFor="let option of dropdownFamily_Child" [value]="option.UniformTypeKey">{{option.UniformTypeDescription}}</option>
+                                                                                </select>
+                                                                            </span>
+                                                                        </div>
+            
+                                                                    </div>
+                                                                    <!-- child34-->
+                                                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                                                        <div [ngClass]="{'select-hidden':!beditFam || !allowBit3}" class="col-md-6 col-sm-6 col-xs-12">
+                                                                            <span>
+                                                                                <label class="span-inline  welfare_text_header">{{message.getMessage('Welfare.Child3rd')}} :</label>
+                                                                            </span>
+                                                                            <span>
+                                                                                <label *ngIf="!beditFam && walfareModelFamilyTrip?.Child_3Size_Show != ''" id="IWelfare.Child3" class="welfare_text">{{walfareModelFamilyTrip?.Child_3Size_Show}}</label>
+                                                                                <label *ngIf="!beditFam && walfareModelFamilyTrip?.Child_3Size_Show == ''" id="IWelfare.Child3">-</label>
+                                                                                <select *ngIf="beditFam && allowBit3" [(ngModel)]='indexOfDropdownChild3' class="form-control select-inline">
+                                                                                    <option *ngFor="let option of dropdownFamily_Child" [value]="option.UniformTypeKey">{{option.UniformTypeDescription}}</option>
+                                                                                </select>
+                                                                            </span>
+                                                                        </div>
+                                                                        <div [ngClass]="{'select-hidden':!beditFam || !allowBit4}" class="col-md-6 col-sm-6 col-xs-12">
+                                                                            <span>
+                                                                                <label class="span-inline  welfare_text_header">{{message.getMessage('Welfare.Child4th')}} :</label>
+                                                                            </span>
+                                                                            <span>
+                                                                                <label *ngIf="!beditFam && walfareModelFamilyTrip?.Child_4Size_Show != ''" id="IWelfare.Child4" class="welfare_text">{{walfareModelFamilyTrip?.Child_4Size_Show}}</label>
+                                                                                <label *ngIf="!beditFam && walfareModelFamilyTrip?.Child_4Size_Show == ''" id="IWelfare.Child4">-</label>
+                                                                                <select *ngIf="beditFam && allowBit4" [(ngModel)]='indexOfDropdownChild4' class="form-control select-inline">
+                                                                                    <option *ngFor="let option of dropdownFamily_Child" [value]="option.UniformTypeKey">{{option.UniformTypeDescription}}</option>
+                                                                                </select>
+                                                                            </span>
+                                                                        </div>
+            
+                                                                    </div>
+                                                                    <!--child5-->
+                                                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                                                        <div [ngClass]="{'select-hidden':!beditFam || !allowBit5}" class="col-md-6 col-sm-6 col-xs-12">
+                                                                            <span>
+                                                                                <label class="span-inline  welfare_text_header">{{message.getMessage('Welfare.Child5th')}} :</label>
+                                                                            </span>
+                                                                            <span>
+                                                                                <label *ngIf="!beditFam && walfareModelFamilyTrip?.Child_5Size_Show != ''" id="IWelfare.Child5" class="welfare_text">{{walfareModelFamilyTrip?.Child_5Size_Show}}</label>
+                                                                                <label *ngIf="!beditFam && walfareModelFamilyTrip?.Child_5Size_Show == ''" id="IWelfare.Child5">-</label>
+                                                                                <select *ngIf="beditFam && allowBit5" [(ngModel)]='indexOfDropdownChild5' class="form-control select-inline">
+                                                                                    <option *ngFor="let option of dropdownFamily_Child" [value]="option.UniformTypeKey">{{option.UniformTypeDescription}}</option>
+                                                                                </select>
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+
+            
+            
+            
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    <!-- EMPSUIT INFO-->
+                    <div class="col-md-12 col-sm-12">
+                    <!-- HOSPITAL INFO-->
+                    <div class="col-md-6 col-sm-12">
+                        <div class="well well-lg bg-lightblue">
+                            <div class="sub-content" style="position: relative;">
+                                <span class="sub-topic">{{message.getMessage('Welfare.TitleSocialSecurity')}}</span>
+                                <br />
+                                <br />
+                                <div class="special-text">
+                                    <span class="bring-to-front">{{walfareModel?.SocialSecurityProvidentFund?.Hospital1}}</span>
+                                    <img src="assets/images/hospital-icon.png" class="img-h" />
+                                </div>
+                                <div class="red-remark" style="position: absolute;bottom:-55px;">{{message.getMessage('Welfare.RemarkHospital')}}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- MONEY INFO-->
+                    <div class="col-md-6 col-sm-12">
+                        <div class="well well-lg bg-blue">
+                            <div class="sub-content" style="position: relative;">
+                                <span class="sub-topic">{{message.getMessage('Welfare.TitleProvidentFund')}}</span>
+                                <br />
+                                <br />
+                                <table id="tbConvidenFund" class="table">
+                                    <tbody>
+                                        <tr>
+                            <td colspan="4">
+
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div class="col-md-7 col-sm-7 col-xs-12">
+                                        <label id="Welfare.RegisterDate" class="welfare_text welfare_text_header">
+                                            {{message.getMessage('Welfare.RegisterDate')}} :
+                                        </label>
+                                    </div>
+                                    <div class="col-md-5 col-sm-5 col-xs-12">
+                                        <label id="IWelfare.RegisterDate" class="welfare_text">
+                                            {{walfareModel?.SocialSecurityProvidentFund?.ProvidentStartDate}}
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div class="col-md-7 col-sm-7 col-xs-12">
+                                        <label id="Welfare.Plan" class="welfare_text welfare_text_header">
+                                            {{message.getMessage('Welfare.Plan')}} :
+                                        </label>
+                                    </div>
+                                    <div class="col-md-5 col-sm-5 col-xs-12">
+                                        <label id="IWelfare.Plan" class="welfare_text">
+                                            {{walfareModel?.SocialSecurityProvidentFund?.ProvidentPlan}}
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div class="col-md-7 col-sm-7 col-xs-12">
+                                        <label id="Welfare.Percentage" class="welfare_text welfare_text_header">
+                                            {{message.getMessage('Welfare.PercentEm')}} :
+                                        </label>
+                                    </div>
+                                    <div class="col-md-5 col-sm-5 col-xs-12">
+                                        <label id="IWelfare.Percentage" class="welfare_text">
+                                            {{walfareModel?.SocialSecurityProvidentFund?.ProvidentPercent}}
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div class="col-md-7 col-sm-7 col-xs-12">
+                                        <label id="Welfare.Percentage" class="welfare_text welfare_text_header">
+                                            {{message.getMessage('Welfare.PercentCom')}} :
+                                        </label>
+                                    </div>
+                                    <div class="col-md-5 col-sm-5 col-xs-12">
+                                        <label id="IWelfare.Percentage" class="welfare_text">
+                                            {{walfareModel?.SocialSecurityProvidentFund?.ProvidentPercentCompany}}
+                                        </label>
+                                    </div>
+                                </div>
+                            </td>
+
+                        </tr>
+
+                        <!-- <tr>
+                                            <td>
+                                                <label id="Welfare.RegisterDate" class="welfare_text_header">
+                                                    {{message.getMessage('Welfare.RegisterDate')}} :
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <label id="IWelfare.RegisterDate" class="welfare_text">
+                                                    {{walfareModel?.SocialSecurityProvidentFund?.ProvidentStartDate}}
+                                                </label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label id="Welfare.Plan" class="welfare_text_header">
+                                                    {{message.getMessage('Welfare.Plan')}} :
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <label id="IWelfare.Plan" class="welfare_text">
+                                                    {{walfareModel?.SocialSecurityProvidentFund?.ProvidentPlan}}
+                                                </label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label id="Welfare.Percentage" class="welfare_text_header">
+                                                    {{message.getMessage('Welfare.PercentEm')}} :
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <label id="IWelfare.Percentage" class="welfare_text">
+                                                    {{walfareModel?.SocialSecurityProvidentFund?.ProvidentPercent}}
+                                                </label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label id="Welfare.Percentage" class="welfare_text_header">
+                                                    {{message.getMessage('Welfare.PercentCom')}} :
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <label id="IWelfare.Percentage" class="welfare_text">
+                                                    {{walfareModel?.SocialSecurityProvidentFund?.ProvidentPercentCompany}}
+                                                </label>
+                                            </td>
+                        </tr> -->
+                                    </tbody>
+                                    <div class="red-remark bring-to-front" style="position: absolute;bottom:-35px;">{{message.getMessage('Welfare.RemarkPro')}}</div>
+                                </table>
+                            </div>
+                            <img src="assets/images/money-icon.png" class="img-m" height="120" width="110" />
+                        </div>
+                    </div>
+                    </div>
+                    
+
+
+
+                   
+                    <div class="clear"></div>
+                    <footer>
+                        <p style="text-align:center">All right reserved by :
+                            <a href="http://www.esynergy-corp.com/">E-Synergy</a>
+                        </p>
+                    </footer>
+                </div>
+                <!-- /. PAGE INNER  -->
+            </div>
+            <!-- /. PAGE WRAPPER  -->
+        </div>
+    </div>
+</body>
+
+</html>

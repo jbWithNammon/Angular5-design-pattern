@@ -1,0 +1,52 @@
+<!-- <div>
+    <div class="centered">
+        <form>
+            <div>
+                <img class="middle" src="../../../assets/images/ic_perm_identity_white_48dp_2x.png">                
+            </div>            
+            <div class="form-group">
+                <label for="exampleInputEmail1">Email</label>
+                <input [numpad]="email" type="email" class="form-control input-login" id="exampleInputEmail1"  [(ngModel)]="email" name="email" (ngModelChange)="email = $event" placeholder="Enter email" >                
+            </div>
+            <div class="form-group">
+                <label for="pwd">Password:</label>
+                <input  type="password" class="form-control input-login" id="pwd" [(ngModel)]="password" name="password" (ngModelChange)="password = $event" (keyup.enter)="getLogin()" value="1234">
+            </div>            
+            <label *ngIf="loginFail" style="color:red" >user or password is incorrect!!</label>      
+      <button type="submit" class="btn btn-primary middle bt-login" (click)="getLogin()">Login</button> 
+      <button type="submit" class="btn btn-primary middle bt-login" (click)="getasmx()">ASMX</button> 
+          
+            </form>
+    </div>           
+</div> -->
+
+<!-- <nav class="navbar navbar-default top-navbar" role="navigation">
+        <div class="navbar-header">
+            <a href="LandingPage.html"><img class="img" src="assets/images/logo/logo_s.png" style="width:75%" /></a>
+        </div>
+        <div class="navbar-right login-padding" style="top:20px">
+            <label id="login" style="font-size:14px">เข้าสู่ระบบ</label>&nbsp;&nbsp;
+            <input class="form-control-login" placeholder="Username" id="Username">
+            <input class="form-control-login" placeholder="Password" id="Password">&nbsp;
+            <a class="btn btn-success btn-sm" href="#">Login</a>
+        </div>
+    </nav> -->
+
+<div id="page-inner" style="background-color:#c6d2f5;margin-bottom: 0px;">
+    <div class="row" style="margin:0 10px 0 10px;">
+        <div class="col-md-12">
+            <div class="panel_login">
+                <!-- panel-table  -->
+                <div class="panel-news">
+                    <div class="style-news" *ngFor="let pNews of news">
+                        <div class="news-subject">{{message.getMessage('News.Title')}} {{pNews.PostSubject}}</div>
+                        <div class="news-detail">{{pNews.PostDetail}}</div>
+                        <div class="news-date">{{message.getMessage('News.Date')}} {{pNews.PostDateStr}}</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <bottom-div></bottom-div>
+</div>

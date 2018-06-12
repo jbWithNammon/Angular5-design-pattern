@@ -1,0 +1,151 @@
+
+
+  
+
+  
+  ::-webkit-input-placeholder { color: #ccc; }
+  :-moz-placeholder { color: #ccc; }
+  ::-moz-placeholder { color: #ccc; }
+  :-ms-input-placeholder { color: #ccc; }
+  
+  
+  
+  
+  /* .mat-dialog-container {
+    padding: 0 !important;   
+    overflow: hidden !important;
+  }
+  .mat-dialog-actions {
+    padding: 0 !important;
+    
+} */
+li.on-border{
+  border:none !important;
+  background-color: #ffffff !important;
+}
+
+@media(min-width:320px)
+{
+  .dialog-body { 
+    margin: 0; 
+    padding: 0; 
+    font-family: 'Open Sans', sans-serif; 
+    color: #ffffff;
+    width: 200px;
+    height: 250px;
+    margin: auto;
+   background-color: #ffffff;
+  }
+
+  .numpad { 
+    margin: 20px 0;
+    padding: 0;
+    /* position: absolute; */
+    bottom: 0;
+    width: 200px;
+  }
+  
+  .numpad li {
+    font-size: 16px;
+    float: left;
+    list-style: none;
+    text-align: center;
+    height: 33px;
+    padding-top: 2px;
+    width: 33.33%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 2px solid #ffffff;
+    background-color: #152F54;
+  }
+
+  .dialog-container { 
+    width: 200px;
+    height: 240px;
+    position: relative;
+    /* border: 1px solid #eee; */
+    margin-top: 20px;
+  }
+
+  .dialog-input {
+    font-size: 16px;
+    padding: 3px 10px;
+    border: 0;
+    border-bottom: 1px solid #152F54;
+    margin: 0 15px;
+    width: 84%;
+    outline: 0;
+    text-align: right;
+    border-radius: 0;
+    color: #152F54;
+  }
+}
+
+
+@media(min-width:768px) 
+{
+  .dialog-body { 
+    margin: 0; 
+    padding: 0; 
+    font-family: 'Open Sans', sans-serif; 
+    color: #ffffff;
+    width: 320px;
+    height: 480px;
+    margin: auto;
+   background-color: #ffffff;
+  }
+
+  .numpad { 
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    bottom: 0;
+    width: 320px;
+  }
+  
+  .numpad li {
+    font-size: 30px;
+    float: left;
+    list-style: none;
+    text-align: center;
+    height: 65px;
+    padding-top: 10px;
+    width: 33.33%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 2px solid #ffffff;
+    background-color: #152F54;
+  }
+
+  .dialog-container { 
+    padding-top: 40px;
+    width: 320px;
+    height: 433px;
+    position: relative;
+    /* border: 1px solid #eee; */
+    margin-top: 20px;
+  }
+
+  .dialog-input {
+    font-size: 31px;
+    padding: 3px 10px;
+    border: 0;
+    border-bottom: 2px solid #152F54;
+    margin: 0 15px;
+    width: 84%;
+    outline: 0;
+    text-align: right;
+    border-radius: 0;
+    color: #152F54;
+  }
+}

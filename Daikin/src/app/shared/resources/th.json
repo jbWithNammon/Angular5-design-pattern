@@ -1,0 +1,9 @@
+{
+    "TH":{
+    "greeting": "สวัสดี",
+    "goodbye": "ลาก่อน"
+},
+    "EN":{
+    "greeting": "Hello",
+    "goodbye": "bye"
+}}

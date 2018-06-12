@@ -1,0 +1,43 @@
+﻿.pn-heading {
+    padding-bottom:10px;
+    border-bottom:1px solid #ddd;
+    border-top-left-radius:3px;
+    border-top-right-radius:3px;
+
+}
+
+.btn-box-resize
+{
+    background:transparent;
+    padding:5px;
+}
+
+.box-tools
+{
+   float:right;
+   top:-10px;
+}
+
+.panel-table
+{
+    background-color: #F8F9F9;
+    border:1px solid #fbf8f8;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.th_center
+{
+    text-align:center;
+}
+
+.th_right
+{
+    text-align:right;
+}
+
+.label-header
+{
+    font-size:17px;
+    font-weight:bold;
+    color:black;
+}

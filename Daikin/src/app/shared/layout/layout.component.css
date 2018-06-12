@@ -1,0 +1,15 @@
+.UsernameInput {
+    background: url('../../../assets/images/flag/userIconG.png');    
+    background-repeat: no-repeat;
+    background-size: 15px 15px;
+    background-position: center left;
+    padding-left: 20px;
+}
+.PasswordInput {
+    background: url('../../../assets/images/flag/passwordIconG.png');
+    background-repeat: no-repeat;
+    background-size: 15px 15px;
+    background-position: center left;
+    padding-left:20px;
+}
+

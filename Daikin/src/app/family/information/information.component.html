@@ -1,0 +1,138 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DIT - EDBS</title>
+</head>
+
+<body>
+    <!-- /. PAGE INNER  -->
+    <div id="page-wrapper">
+        <div>
+            <div class="row" style="margin-left:10px;">
+                <div class="col-md-12">
+                   
+                            <h3 id="TAX-Title" class="page-header">
+                                    <div>
+                                        <div class="pn_header">
+                                            <i class="fa fa-users"></i>
+                                            <label>{{message.getMessage('Family.FamInfo')}}</label>
+                                        </div>
+                                    </div>
+                                </h3>
+                            <select *ngIf="isNarrow"  (change)="onSelectDDLTabInfo($event.target.value)"  class="form-control control_width ddl-tab">
+                                    <option *ngFor="let tab of listOfTab" [value]="tab.link" >{{message.getMessage(tab.display)}}</option>
+                                </select>
+                    <ul id="tabs" class="nav nav-tabs" data-tabs="tabs" *ngIf="!isNarrow">
+                        <li class="active" id="liTabl1">
+                            <a href="#" (click)="onSelectTabInfo($event)" (down)="onSelectTabInfo($event)" (up)="onSelectTabInfo($event)" id="detailBtn" data-toggle="tab">{{message.getMessage('Family.FamInfo')}}</a>
+                        </li>
+                        <li id="liTabl2">
+                            <a href="#" (click)="onSelectTabInfo($event)" (down)="onSelectTabInfo($event)" (up)="onSelectTabInfo($event)" id="porvidentfundBtn" data-toggle="tab">{{message.getMessage('Family.FamProvidentFund')}}</a>
+                        </li>
+                        <li id="liTabl3">
+                            <a href="#" (click)="onSelectTabInfo($event)" (down)="onSelectTabInfo($event)" (up)="onSelectTabInfo($event)" id="lifeInsuranceBtn" data-toggle="tab">{{message.getMessage('Family.FamLifeInsurance')}}</a>
+                        </li>
+                    </ul>
+                    
+                </div>
+            </div>
+
+            <div class="row" style="margin:0 10px;">
+                <div class="col-md-12">
+                    <div id="my-tab-content" class="tab-content">
+                        <!-- Family -->
+                        <div class="tab-pane active" id="divFamily">
+                            <div class="panel-table">
+                                <div>
+                                    <table class="table table-striped table-hover" id="dataTables-example">
+                                        <thead class="table_bg">
+                                            <tr style="height:45px;">
+                                                <th class="th_center">{{message.getMessage('Family.No')}}</th>
+                                                <th>{{message.getMessage('Family.FamRelation')}}</th>
+                                                <th>{{message.getMessage('Family.FamName')}}</th>
+                                                <th class="th_center">{{message.getMessage('Family.FamBirthDate')}}</th>
+                                                <th class="th_center">{{message.getMessage('Family.FamCitizenID')}}</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let dataFam of familyList; let i = index" style="height:45px;">
+                                                <td class="th_center">{{i+1}}</td>
+                                                <td>{{dataFam.FamilyTypeTh}}</td>
+                                                <td>{{dataFam.FamilyFullName}}</td>
+                                                <td class="th_center">{{dataFam.FamilyBirth}}</td>
+                                                <td class="th_center">{{dataFam.FamilyId}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div style="color:red;margin:20px 0 0 10px;">{{message.getMessage('Family.Remark1')}}</div>
+                        </div>
+
+
+                        <!-- Provident fund -->
+                        <div class="tab-pane" id="divProvident_fund">
+                            <div class="panel-table">
+                                <div>
+                                    <table class="table table-striped table-hover" id="dataTables-example">
+                                        <thead class="table_bg">
+                                            <tr style="height:45px;">
+                                                <th class="th_center">{{message.getMessage('Family.No')}}</th>
+                                                <th>{{message.getMessage('Family.FamNameOfBeneficiary')}}</th>
+                                                <th>{{message.getMessage('Family.FamRelation2')}}</th>
+                                                <th class="th_center">{{message.getMessage('Family.FamPercent')}}</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let dataBef of befPorvidentfundList; let i = index" style="height:45px;">
+                                                <td class="th_center">{{i+1}}</td>
+                                                <td>{{dataBef.BeneficiaryName}}</td>
+                                                <td>{{dataBef.BeneficiaryTypeTh}}</td>
+                                                <td class="th_center">{{dataBef.BeneficiaryPercentage}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                            <div style="color:red;margin:20px 0 0 10px;">{{message.getMessage('Family.Remark2')}}</div>
+                        </div>
+
+
+                        <!-- Lift_insurance -->
+                        <div class="tab-pane" id="divLift_insurance">
+                            <div class="panel-table">
+                                <div>
+                                    <table class="table table-striped table-hover" id="dataTables-example">
+                                        <thead class="table_bg">
+                                            <tr style="height:45px;">
+                                                <th class="th_center">{{message.getMessage('Family.No')}}</th>
+                                                <th>{{message.getMessage('Family.FamNameOfBeneficiary')}}</th>
+                                                <th>{{message.getMessage('Family.FamRelation2')}}</th>
+                                                <th class="th_center">{{message.getMessage('Family.FamPercent')}}</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let dataBef of beflifeInsuranceBtn; let i = index" style="height:45px;">
+                                                <td class="th_center">{{i+1}}</td>
+                                                <td>{{dataBef.BeneficiaryName}}</td>
+                                                <td>{{dataBef.BeneficiaryTypeTh}}</td>
+                                                <td class="th_center">{{dataBef.BeneficiaryPercentage}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                            <div style="color:red;margin:20px 0 0 10px;">{{message.getMessage('Family.Remark3')}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

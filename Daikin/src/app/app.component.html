@@ -1,0 +1,8 @@
+<shared-layout>
+</shared-layout>
+<!-- <div [ngClass]="{'col-md-3':isSelected === true }" ><left-bar></left-bar></div>
+                <div [ngClass]="{'col-md-9':isSelected === true }" ><router-outlet></router-outlet></div> -->
+<left-bar></left-bar>
+<div [drag-scroll]="isKIOSK" class="noselect">
+        <router-outlet></router-outlet>
+</div>

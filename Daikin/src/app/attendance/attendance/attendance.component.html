@@ -1,0 +1,118 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta charset="utf-8" />
+  <title>DIT - EDBS</title>
+</head>
+
+<body>
+  <div id="wrapper">
+    <div id="page-inner" style="background-color:#EFEFEE; margin-bottom: 0px;min-height:697px;">
+      <div class="row">
+        <div class="col-md-12" style="padding:0 27px 0 20px;">
+          <h3 id="TAX-Title" class="page-header">
+            <div class="pn_header">
+              <i class="fa fa-clock"></i>
+              <label>{{message.getMessage('Attendance.Title')}}</label>
+            </div>
+            <div style="float:right;margin-top:10px;margin-bottom:10px;">
+              <input id="Attendance.1Month" class="btn btn-edb" style="height:40px;" type="button" (click)="showMonthAgo()" value="{{message.getMessage('Attendance.BnMonthAgo')}}"
+              />
+              <input id="Attendance.CurrentMonth" class="btn btn-edb" style="height:40px;" type="button" (click)="showThisMonth()" value="{{message.getMessage('Attendance.BnThisAgo')}}"
+              />
+              <input id="Attendance.NextMonth" class="btn btn-edb" style="height:40px;" type="button" (click)="showNextMonth()" value="{{message.getMessage('Attendance.BnNextMonth')}}"
+              />
+            </div>
+          </h3>
+        </div>
+      </div>
+      <div class="row" style="margin:10px;">
+        <div class="col-md-12">
+          <div id="my-tab-content" class="tab-content">
+            <div class="panel-table">
+              <div class="table-responsive">
+                <table class="table table-striped table-hover" id="dataTables-example" style="color:#152F54">
+                  <thead class="table_bg">
+                    <tr style="height:45px;">
+                      <th class="th_center">
+                        {{message.getMessage('Attendance.AtdDay')}}
+                      </th>
+                      <th class="th_center">
+                        {{message.getMessage('Attendance.Shift')}}
+                      </th>
+                      <th>
+                        {{message.getMessage('Attendance.TimeCard')}}
+                      </th>
+                      <th>
+                        {{message.getMessage('Attendance.Descript')}}
+                      </th>
+                      <th>
+                        {{message.getMessage('Attendance.RequestNumber')}}
+                      </th>
+                      <th>
+                        {{message.getMessage('Attendance.OverTime')}}
+                      </th>
+                      <th>
+                        {{message.getMessage('Attendance.OT1')}}
+                      </th>
+                      <th>
+                        {{message.getMessage('Attendance.OT15')}}
+                      </th>
+                      <th>
+                        {{message.getMessage('Attendance.OT2')}}
+                      </th>
+                      <th>
+                        {{message.getMessage('Attendance.OT25')}}
+                      </th>
+                      <th>
+                        {{message.getMessage('Attendance.OT3')}}
+                      </th>
+                    </tr>
+                  </thead>
+                  <tr *ngFor="let data of atdShowOn">
+                    <td class="th_center">
+                      {{data.Day}}
+                    </td>
+                    <td class="th_center">
+                      {{data.Shift}}
+                    </td>
+                    <td>
+                      {{data.TimeCard}}
+                    </td>
+                    <td>
+                      {{data.Description}}
+                    </td>
+                    <td>
+                      {{data.RequestNo}}
+                    </td>
+                    <td>
+                      {{data.OverTime}}
+                    </td>
+                    <td>
+                      {{data.OT1}}
+                    </td>
+                    <td>
+                      {{data.OT15}}
+                    </td>
+                    <td>
+                      {{data.OT2}}
+                    </td>
+                    <td>
+                      {{data.OT25}}
+                    </td>
+                    <td>
+                      {{data.OT3}}
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <bottom-div></bottom-div>
+    </div>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,65 @@
+    <div id="wrapper"> 
+        <div id="page-wrapper">
+            <div >
+                <div class="row">
+                    <div class="col-md-12" style="padding:0 20px 0 20px;">
+                        <h3 id="TAX-Title" class="page-header">
+                          <div>
+                              <div class="pn_header">
+                                <i class="fa fa-briefcase"></i>
+                                <label>{{message.getMessage('Tax.Title')}}</label>
+                              </div>
+                              <div style="float:right" class="btnTax">
+                                  <input id="TAX.PreviousYear" class="btn btn-edb" style="height:40px;" type="button" (click)="showYearAgo()"  value="{{message.getMessage('Tax.BnYearAgo')}}" />
+                                  <input id="TAX.CurrentYear" class="btn btn-edb" style="height:40px;" type="button" (click)="showThisYear()" value="{{message.getMessage('Tax.BnThisYear')}}" />
+                                  <input id="TAX.NextYear" class="btn btn-edb" style="height:40px;" type="button" (click)="showNextYear()"  value="{{message.getMessage('Tax.BnNextYear')}}" />
+                              </div>
+                          </div>
+                        </h3>
+                    </div>
+                </div>
+                <div class="row" style="margin:10px;">
+                    <div class="col-md-12">
+                        <div id="my-tab-content" class="tab-content">
+                            <div class="panel-table">
+                                <div> 
+                                    <table class="table table-striped table-hover" id="TAX-table">
+                                        <thead class="table_bg">  
+                                        <tr style="height:45px;">
+                                          <th class="th_center">
+                                            {{message.getMessage('Tax.Year')}}
+                                          </th>
+                                          <th class="th_center">
+                                            {{message.getMessage('Tax.Number')}}
+                                          </th>
+                                          <th class="th_left">
+                                            {{message.getMessage('Tax.Detail')}}
+                                          </th>
+                                          <th class="th_right">
+                                            {{message.getMessage('Tax.Amount')}}
+                                          </th>
+                                        </tr>
+                                      </thead>
+                                        <tr *ngFor="let data of taxShowOn" style="height:45px;">
+                                          <td class="th_center">
+                                            {{data.Year}}
+                                          </td>
+                                          <td class="th_center">
+                                            {{data.Item}}
+                                          </td>
+                                          <td class="th_left">
+                                            {{data.DeductionDescription}}
+                                          </td>
+                                          <td class="th_right">
+                                            {{data.DeductionAmount}}
+                                          </td>
+                                      </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="TaxRemark">{{message.getMessage('Tax.Remark1')}}</div>
+            </div>
+        </div>
+    </div>
